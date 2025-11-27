@@ -2,20 +2,33 @@
 
 import Image from 'next/image';
 import MotionDiv from '../component/MotionDivWrapper';
-import Children from '@/../public/child.jpg';
+import image1 from '@/../public/img1.jpg'
+import image2 from '@/../public/img2.jpg'
+import image3 from '@/../public/img3.jpg'
+import image4 from '@/../public/img4.jpg'
+import image5 from '@/../public/img5.jpg'
+import image6 from '@/../public/img6.jpg'
+import image7 from '@/../public/img7.jpg'
+import image8 from '@/../public/img8.jpg'
+import image9 from '@/../public/img9.jpg'
+import image10 from '@/../public/img10.jpg'
+import image11 from '@/../public/img11.jpg'
+
+
 
 export default function GalleryPage() {
-  // abhi array me ek imported image aur baaki string images mix kar raha hu
   const images = [
-    Children, 
-    Children, 
-    Children, 
-    Children, 
-    Children, 
-    Children, 
-    Children, 
-    Children, 
-    Children, 
+    image1, 
+    image10, 
+    image9, 
+    image4, 
+    image5,
+    image6, 
+    image7, 
+    image8, 
+    image3, 
+    image2,
+    image11,
     
   ];
 
@@ -30,8 +43,7 @@ export default function GalleryPage() {
       >
         <h1 className="text-4xl font-bold text-red-900 mb-4">School Gallery</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Bright Link School ki yaadein aur highlights, students aur events ke
-          zariye captured moments.
+          Memories and highlights of Bright Link School, captured through students and events.
         </p>
       </MotionDiv>
 

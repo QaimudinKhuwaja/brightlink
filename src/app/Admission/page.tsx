@@ -4,7 +4,7 @@ import MotionDiv from '../component/MotionDivWrapper';
 
 export default function AdmissionPage() {
   return (
-    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 ">
       {/* Hero Header */}
       <div className="relative bg-red-900 text-white py-24 px-6 md:px-16 text-center">
         <MotionDiv
@@ -13,12 +13,10 @@ export default function AdmissionPage() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Admission at Bright Link School
+            Admission at BrightLink School
           </h1>
           <p className="max-w-2xl mx-auto text-lg text-gray-200">
-            Hamara admission process simple aur transparent hai. Taleem sab ka
-            haq hai aur hum har student ko quality education provide karne ka
-            wada karte hain.
+            Our admission process is simple and transparent. Education is every childs right, and we promise to provide quality education to every student.
           </p>
         </MotionDiv>
       </div>
@@ -30,10 +28,10 @@ export default function AdmissionPage() {
         </h2>
         <div className="space-y-8 relative border-l-4 border-red-900 pl-6">
           {[
-            'Admission form school office se hasil karein.',
-            'Form ko required documents ke sath submit karein.',
-            'Admission test aur interview ke zariye selection hoti hai.',
-            'Final merit list ke baad admission confirm hota hai.',
+            'Obtain the admission form from the school office.',
+            'Submit the completed form along with the required documents.',
+            'Selection is done through an admission test.',
+            'After the final merit list, admission is confirmed.',
           ].map((step, index) => (
             <MotionDiv
               key={index}
@@ -58,8 +56,8 @@ export default function AdmissionPage() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {[
-            { title: 'B-Form / Birth Certificate', desc: 'Copy of child birth proof' },
-            { title: '2 Photographs', desc: 'Recent passport size photos' },
+            { title: 'B-Form / Birth Certificate', desc: 'Copy of child’s birth proof' },
+            { title: '2 Photographs', desc: 'Recent passport-size photos' },
             { title: 'School Leaving Certificate', desc: 'If transferring from another school' },
             { title: 'Parent CNIC Copy', desc: 'Father/Mother/Guardian ID card' },
           ].map((doc, index) => (
@@ -91,17 +89,17 @@ export default function AdmissionPage() {
             Apply Now for Admission
           </h2>
           <p className="text-lg mb-8 leading-relaxed text-gray-200">
-            Apne bachon ka mustaqbil roshan banane ke liye Bright Link School ka
-            hissa banein. Form submit karna sirf ek click door hai!
+            Join Bright Link School to give your child a bright future. Submitting the admission form is just one click away!
           </p>
-          <a
-            href="https://full-stack-form-phi.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl shadow-md transition duration-300"
-          >
-            Admission Form
-          </a>
+         <a
+  href="https://wa.me/923000811056"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-xl shadow-md transition duration-300"
+>
+  Contact Us
+</a>
+
         </MotionDiv>
       </div>
     </section>

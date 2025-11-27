@@ -13,12 +13,10 @@ export default function AboutPage() {
         className="text-center mb-12"
       >
         <h1 className="text-4xl font-bold text-red-900 mb-4">
-          About Bright Link Public Elementary School
+          About Bright Link Public High School
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Bright Link School, Khuhra City ka ek mashhoor taleemi idara hai jo
-          8th class tak ki taleem faraham karta hai. Hamara mission bacho ko
-          modern aur behtareen taleem ke zariye roshan mustaqbil dena hai.
+        Bright Link School is a well-known educational institution in Khuhra City, offering complete schooling from early grades up to the HSC level. Our mission is to provide students with a bright future through modern, high-quality, and meaningful education.
         </p>
       </MotionDiv>
 
@@ -32,8 +30,7 @@ export default function AboutPage() {
         >
           <h2 className="text-2xl font-semibold text-blue-700 mb-4">Our Vision</h2>
           <p className="text-gray-700">
-            Hamara vision hai ke hum bacho ko aise leaders banaye jo taleem,
-            ikhlaq aur maashray ki khidmat me misaal ban sakein.
+          Our vision is to shape children into leaders who excel in education, character, and service to the community.
           </p>
         </MotionDiv>
 
@@ -45,8 +42,7 @@ export default function AboutPage() {
         >
           <h2 className="text-2xl font-semibold text-blue-700 mb-4">Our Mission</h2>
           <p className="text-gray-700">
-            Taleem ke sath character building aur skills development par barabar
-            tawajjo dete hain taake students har field me kamiyab ho saken.
+          Along with education, we give equal importance to character building and skill development so that students can succeed in every field.
           </p>
         </MotionDiv>
       </div>
@@ -58,12 +54,13 @@ export default function AboutPage() {
         transition={{ duration: 1 }}
         className="bg-red-900 text-white rounded-2xl shadow-lg max-w-4xl mx-auto p-10"
       >
-        <h2 className="text-3xl font-bold mb-4">Principals Message</h2>
+        <h2 className="text-3xl font-bold mb-4">Principal’s Message</h2>
         <p className="text-lg mb-6 leading-relaxed">
-          Bright Link School sirf ek taleemi idara nahi balki aik family hai jo
-          har student ko unki behtareen salahiyaton tak pohchane ka waada karti
-          hai. Hamare teachers ki mehnat aur students ki lagan mil kar ek roshan
-          mustaqbil banate hain.
+        At Bright Link School, we see education as a journey of growth, character, and inspiration. 
+        Our school is a caring family where every child is valued, supported, and encouraged to reach their true potential.
+        With dedicated teachers and a nurturing environment, we help students discover their talents, build confidence,
+        and prepare for a bright, successful future. It is my honor to lead this wonderful community, and I warmly welcome
+        every child to join us on this beautiful path of learning and possibility.
         </p>
         <p className="font-semibold text-xl">- Adnan Ahmed</p>
         <p className="italic">Principal</p>

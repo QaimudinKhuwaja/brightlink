@@ -6,28 +6,29 @@ export default function EventsPage() {
   const events = [
     {
       title: 'Annual Sports Day',
-      date: 'March 15, 2025',
-      description:
-        'Bright Link School ka sports day, jisme students apni athletic skills dikhayenge aur teamwork seekhenge.',
+      description: 'Students showcase their athletic skills and learn teamwork.',
     },
     {
       title: 'Science Exhibition',
-      date: 'April 10, 2025',
-      description:
-        'Students apne innovative science projects aur experiments showcase karenge.',
+      description: 'Innovative student projects and experiments are displayed.',
     },
     {
       title: 'Parent Teacher Meeting',
-      date: 'May 5, 2025',
-      description:
-        'Teachers aur parents ke darmiyan meeting, taake bacho ki progress par guftagu ki ja sake.',
+      description: 'Teachers and parents discuss student progress and growth.',
     },
     {
       title: 'Cultural Festival',
-      date: 'June 20, 2025',
-      description:
-        'School ka annual cultural festival jisme students music, drama aur arts me perform karenge.',
+      description: 'Students perform music, drama, and arts in the annual festival.',
     },
+    {
+      title: 'Independence Day Celebration',
+      description: 'Honoring the nation with performances and activities.',
+    },
+    {
+      title: 'Teacher’s Day',
+      description: 'Celebrating and appreciating the dedication of our teachers.',
+    },
+ 
   ];
 
   return (
@@ -39,11 +40,9 @@ export default function EventsPage() {
         transition={{ duration: 0.8 }}
         className="text-center mb-16"
       >
-        <h1 className="text-4xl font-bold text-red-900 mb-4">Events & News</h1>
+        <h1 className="text-4xl font-bold text-red-900 mb-4">Events & Celebrations</h1>
         <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-          Bright Link School ke upcoming events aur latest news ke updates yahan
-          dekhiye, taake aap humare taleemi aur extracurricular safar ka hissa
-          ban saken.
+          Explore BrightLink School events and celebrations, where students shine academically and creatively throughout the year.
         </p>
       </MotionDiv>
 
@@ -60,9 +59,6 @@ export default function EventsPage() {
             <h3 className="text-2xl font-semibold text-blue-800 mb-2">
               {event.title}
             </h3>
-            <p className="text-sm text-red-600 font-medium mb-4">
-              {event.date}
-            </p>
             <p className="text-gray-600 leading-relaxed">{event.description}</p>
           </MotionDiv>
         ))}

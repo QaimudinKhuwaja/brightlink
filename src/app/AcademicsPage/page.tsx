@@ -4,16 +4,18 @@ import MotionDiv from '../component/MotionDivWrapper';
 
 export default function AcademicsPage() {
   const classes = [
-    { name: 'Nursery', desc: 'Basic learning, alphabets, numbers, rhymes, and fun activities.' },
-    { name: 'KG', desc: 'Introduction to reading, writing, and simple math concepts.' },
-    { name: 'Class 1', desc: 'Building strong foundations in language and numbers.' },
-    { name: 'Class 2', desc: 'Enhancing skills in reading, math, and basic science.' },
-    { name: 'Class 3', desc: 'Developing problem-solving and creativity through activities.' },
-    { name: 'Class 4', desc: 'Strengthening academic concepts with interactive learning.' },
-    { name: 'Class 5', desc: 'Preparing students for middle-level academics.' },
-    { name: 'Class 6', desc: 'Introduction to higher concepts in science, math, and social studies.' },
-    { name: 'Class 7', desc: 'Balanced academics with critical thinking and co-curriculars.' },
-    { name: 'Class 8', desc: 'Final step of Bright Link journey — preparing for higher studies.' },
+    { name: 'Nursery', desc: 'Learning letters, numbers, rhymes, and fun activities to start the journey of learning.' },
+    { name: 'KG', desc: 'Introduction to reading, writing, simple math, and social skills through play.' },
+    { name: 'Class 1', desc: 'Building basics in language and numbers with fun activities.' },
+    { name: 'Class 2', desc: 'Improving reading, math, and understanding the world around us.' },
+    { name: 'Class 3', desc: 'Encouraging creativity, problem-solving, and teamwork.' },
+    { name: 'Class 4', desc: 'Strengthening knowledge with hands-on learning and simple experiments.' },
+    { name: 'Class 5', desc: 'Preparing students for middle school with strong foundations.' },
+    { name: 'Class 6', desc: 'Introducing higher concepts in science, math, and social studies.' },
+    { name: 'Class 7', desc: 'Balanced learning with thinking skills and co-curricular activities.' },
+    { name: 'Class 8', desc: 'Getting ready for secondary school with confidence and knowledge.' },
+    { name: 'Class 9', desc: 'Learning important concepts in science, math, and languages for HSC.' },
+    { name: 'Class 10', desc: 'Reviewing and preparing for exams while building confidence for future studies.' },
   ];
 
   return (
@@ -25,11 +27,9 @@ export default function AcademicsPage() {
         transition={{ duration: 0.8 }}
         className="text-center mb-16"
       >
-        <h1 className="text-4xl font-bold text-red-900 mb-4">Academics</h1>
+        <h1 className="text-4xl font-bold text-red-900 mb-4">Our Academics</h1>
         <p className="text-gray-700 max-w-3xl mx-auto text-lg leading-relaxed">
-          Bright Link School ka curriculum nursery se 8th class tak design kiya gaya hai 
-          jahan students ko modern education ke sath-sath moral values aur discipline 
-          bhi sikhaye jate hain. Har class students ko aglay stage ke liye tayar karti hai.
+          From Nursery to HSC, we teach modern education along with good values and discipline. Every class prepares students for the next step in their learning journey.
         </p>
       </MotionDiv>
 

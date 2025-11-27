@@ -1,18 +1,26 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import SchoolLogo from '@/../public/brightLogo.png'
 
 export default function Footer() {
   return (
     <footer className="bg-red-900 text-white pt-12 pb-6 px-6 md:px-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
         {/* School Info */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Bright Link School</h2>
-          <p className="text-gray-200">
-            Khuhra City ka ek taleemi markaz jo 8th class tak ki taleem aur 
-            behtareen environment provide karta hai.
-          </p>
+        <div className="flex flex-col items-start md:items-start">
+          <h2 className="text-2xl font-bold mb-4">BrightLink Public High School</h2>
+          <div className="mb-4">
+            <Image
+              src={SchoolLogo}
+              alt="Bright Link School Logo"
+              width={120}
+              height={120}
+              className="object-contain"
+            />
+          </div>
+         
         </div>
 
         {/* Quick Links */}
@@ -27,11 +35,6 @@ export default function Footer() {
             <li>
               <Link href="/about" className="hover:text-yellow-300 transition-colors">
                 About Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/admission" className="hover:text-yellow-300 transition-colors">
-                Admissions
               </Link>
             </li>
             <li>
@@ -51,8 +54,8 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
           <p className="text-gray-200">📍 Khuhra, Tehsil Gambat, District Khairpur</p>
-          <p className="text-gray-200">📞 +92 300 1234567</p>
-          <p className="text-gray-200">✉️ info@brightlinkschool.com</p>
+          <p className="text-gray-200">📞 +92 300 0811056</p>
+          <p className="text-gray-200">✉️ email</p>
         </div>
       </div>
 

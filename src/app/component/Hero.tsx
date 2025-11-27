@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <>
       <section 
-        className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-16 pt-24 relative"
+        className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-16 pt-24 relative gap-7"
         style={{
           backgroundImage: `url(${Schoolbg.src})`,
           backgroundSize: 'cover',

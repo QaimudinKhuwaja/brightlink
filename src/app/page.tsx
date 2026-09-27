@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Hero from './component/Hero';
-import MotionDiv from './components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { ArrowRight, BookOpen, Users, Award, Calendar, Star } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';

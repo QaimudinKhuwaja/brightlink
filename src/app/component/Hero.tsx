@@ -3,7 +3,7 @@
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 
 const Hero = () => {
   const [mounted, setMounted] = useState(false);

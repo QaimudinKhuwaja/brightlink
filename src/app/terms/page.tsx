@@ -1,6 +1,6 @@
 'use client';
 
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { FileText, AlertCircle, CheckCircle, XCircle, Scale, Shield } from 'lucide-react';
 
 export default function TermsOfServicePage() {

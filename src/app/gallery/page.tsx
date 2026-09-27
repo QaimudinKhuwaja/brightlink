@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { Image as ImageIcon, Calendar, Tag } from 'lucide-react';
 import Image from 'next/image';
 

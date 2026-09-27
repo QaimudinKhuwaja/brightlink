@@ -33,7 +33,7 @@ export function Sidebar({ admin }: SidebarProps) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const menuItems = [
-    { href: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { href: '/admin/overview', icon: LayoutDashboard, label: 'Dashboard' },
     { href: '/admin/admissions', icon: GraduationCap, label: 'Admissions' },
     { href: '/admin/gallery', icon: Image, label: 'Gallery' },
     { href: '/admin/faculty', icon: Users, label: 'Faculty' },

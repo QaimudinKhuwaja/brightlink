@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { Trophy, FlaskConical, Users, Palette, Flag, Heart, Calendar } from 'lucide-react';
 
 interface Event {

@@ -1,6 +1,6 @@
 'use client';
 
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { Shield, Lock, Eye, UserCheck, Database, Mail } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {

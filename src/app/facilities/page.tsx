@@ -1,6 +1,6 @@
 'use client';
 
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import {
   BookOpen,
   Microscope,

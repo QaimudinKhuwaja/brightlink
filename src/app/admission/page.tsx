@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { GraduationCap, FileText, Upload, CheckCircle, AlertCircle, User, Users, MapPin, Calendar } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

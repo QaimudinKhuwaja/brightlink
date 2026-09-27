@@ -1,6 +1,6 @@
 'use client';
 
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { BookOpen, GraduationCap, Users, Lightbulb, Target, Award, Clock, CheckCircle } from 'lucide-react';
 
 export default function AcademicsPage() {

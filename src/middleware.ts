@@ -18,9 +18,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // If has session and on login page, redirect to dashboard
+  // If has session and on login page, redirect to overview
   if (session && pathname === '/admin/login') {
-    const dashboardUrl = new URL('/admin/dashboard', request.url);
+    const dashboardUrl = new URL('/admin/overview', request.url);
     return NextResponse.redirect(dashboardUrl);
   }
 

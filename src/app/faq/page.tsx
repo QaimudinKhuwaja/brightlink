@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import MotionDiv from '@/app/components/ui/MotionDiv';
+import MotionDiv from '@/components/ui/MotionDiv';
 import { HelpCircle, ChevronDown, ChevronUp, Search } from 'lucide-react';
 
 interface FAQItem {

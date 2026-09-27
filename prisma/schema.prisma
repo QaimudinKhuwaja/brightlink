@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// =====================================
+// ADMISSION SYSTEM
+// =====================================
+
+model Admission {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Student Information
+  studentName          String
+  fatherName           String
+  gender               Gender
+  dateOfBirth          DateTime
+  bFormNumber          String
+  previousSchool       String?
+
+  // Parent Information
+  parentName           String
+  phone                String
+  whatsapp             String
+  email                String?
+
+  // Address
+  city                 String
+  area                 String
+  completeAddress      String
+
+  // Admission Details
+  applyingClass        String
+  session              String
+  admissionDate        DateTime
+
+  // File URLs (Cloudinary)
+  studentPhotoUrl      String
+  birthCertificateUrl  String
+
+  // Status
+  status               AdmissionStatus @default(PENDING)
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([applyingClass])
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AdmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// =====================================
+// GALLERY
+// =====================================
+
+model GalleryImage {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  title       String
+  description String?
+  category    String
+  imageUrl    String
+  uploadDate  DateTime @default(now())
+  isActive    Boolean  @default(true)
+
+  @@index([category])
+  @@index([isActive])
+  @@index([uploadDate])
+}
+
+// =====================================
+// FACULTY
+// =====================================
+
+model Faculty {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  name           String
+  role           String
+  qualification  String
+  experience     String   @default("0 years")
+  emoji          String   @default("👨‍🏫")
+  photoUrl       String?
+  bio            String?
+  isActive       Boolean  @default(true)
+  order          Int      @default(0)
+
+  @@index([isActive])
+  @@index([order])
+}
+
+// =====================================
+// EVENTS
+// =====================================
+
+model Event {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  title       String
+  description String
+  date        String
+  category    EventCategory
+  color       String   @default("blue")
+  icon        String   @default("Calendar")
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+
+  @@index([category])
+  @@index([isActive])
+  @@index([date])
+}
+
+enum EventCategory {
+  SPORTS
+  ACADEMIC
+  CULTURAL
+  NATIONAL
+  CELEBRATION
+  OTHER
+}
+
+// =====================================
+// CONTACT MESSAGES
+// =====================================
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+// =====================================
+// FEEDBACK/TESTIMONIALS
+// =====================================
+
+model Feedback {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  name        String
+  email       String?
+  childClass  String
+  rating      Int
+  comment     String
+  isApproved  Boolean  @default(false)
+  isPublished Boolean  @default(false)
+
+  @@index([isPublished])
+  @@index([isApproved])
+  @@index([rating])
+}
+
+// =====================================
+// ADMIN USERS
+// =====================================
+
+model Admin {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      AdminRole @default(ADMIN)
+  isActive  Boolean  @default(true)
+
+  @@index([email])
+  @@index([username])
+  @@map("admins")
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}

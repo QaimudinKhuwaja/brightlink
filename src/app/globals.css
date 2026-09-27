@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Theme */
+    --background: 0 0% 98%;
+    --background-secondary: 0 0% 96%;
+    --foreground: 222 47% 11%;
+    --foreground-secondary: 215 20% 46%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --card-border: 214 32% 91%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --accent-blue: 217 91% 60%;
+
+    --border: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+
+    --glow-color: 217 91% 60% / 0.15;
+  }
+
+  .dark {
+    /* Dark Theme */
+    --background: 222 47% 5%;
+    --background-secondary: 220 39% 7%;
+    --foreground: 210 40% 98%;
+    --foreground-secondary: 215 20% 65%;
+
+    --card: 220 39% 8%;
+    --card-foreground: 210 40% 98%;
+    --card-border: 217 33% 17%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --accent-blue: 217 91% 65%;
+
+    --border: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    --glow-color: 217 91% 60% / 0.2;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* Modern Pill Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-pill font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-primary/20 text-foreground hover:bg-primary/5 dark:border-primary/30 dark:hover:bg-primary/10;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .btn-ghost {
+    @apply btn hover:bg-accent hover:text-accent-foreground;
+  }
+
+  /* Modern SaaS Cards */
+  .saas-card {
+    @apply bg-card rounded-card border border-card-border transition-all duration-300 hover:shadow-lg dark:hover:shadow-glow-sm hover:-translate-y-1;
+  }
+
+  /* Section Styles */
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4;
+  }
+
+  .section-subheading {
+    @apply text-lg md:text-xl text-foreground-secondary text-center max-w-2xl mx-auto mb-12;
+  }
+
+  /* Heading Emphasis - Italic Blue */
+  .heading-emphasis {
+    @apply italic text-accent-blue font-bold;
+  }
+
+  /* Glow Blob Effect */
+  .glow-blob {
+    @apply absolute rounded-full blur-3xl opacity-20 dark:opacity-30 animate-glow-pulse pointer-events-none;
+  }
+
+  .glow-blob-blue {
+    @apply glow-blob bg-blue-500;
+  }
+
+  /* Glass Effect */
+  .glass-effect {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border border-white/20 dark:border-gray-800/50;
+  }
+
+  /* Gradient Backgrounds */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800;
+  }
+
+  /* Badge/Pill Style */
+  .badge-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-pill bg-secondary/50 dark:bg-secondary/30 text-sm font-medium border border-border/50;
+  }
+
+  /* Stat Card with Blue Dot */
+  .stat-card {
+    @apply flex items-start gap-3;
+  }
+
+  .stat-dot {
+    @apply w-2 h-2 rounded-full bg-accent-blue mt-2 flex-shrink-0;
+  }
+
+  .stat-value {
+    @apply text-3xl md:text-4xl font-bold text-foreground;
+  }
+
+  .stat-label {
+    @apply text-sm text-foreground-secondary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Theme Transition */
+  .theme-transition {
+    @apply transition-colors duration-300;
+  }
+}

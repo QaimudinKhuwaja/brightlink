@@ -24,7 +24,7 @@
     "clsx": "^2.1.0",
     "framer-motion": "^12.6.3",
     "lucide-react": "^0.487.0",
-    "next": "14.0.2",
+    "next": "14.2.35",
     "next-cloudinary": "^5.20.0",
     "pdfkit": "^0.20.2",
     "react": "^18",

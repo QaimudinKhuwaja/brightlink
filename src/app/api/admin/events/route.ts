@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 import { z } from 'zod';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 const eventSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters').max(200),
   description: z.string().min(10, 'Description must be at least 10 characters'),

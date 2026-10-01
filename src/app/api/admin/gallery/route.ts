@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
 import { z } from 'zod';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 const createGallerySchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   description: z.string().optional(),

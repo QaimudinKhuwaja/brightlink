@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getCurrentAdmin } from '@/lib/auth';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const admin = await getCurrentAdmin();

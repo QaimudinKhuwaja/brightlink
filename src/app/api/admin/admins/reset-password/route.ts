@@ -3,6 +3,9 @@ import { requireSuperAdmin, hashPassword } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 const resetPasswordSchema = z.object({
   id: z.string().min(1, 'Admin ID is required'),
   password: z.string().min(8, 'Password must be at least 8 characters'),

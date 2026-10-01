@@ -4,6 +4,9 @@ import { requireSuperAdmin, hashPassword } from '@/lib/auth';
 import { createAdminSchema, updateAdminSchema, resetPasswordSchema } from '@/lib/validations/admin';
 import { z } from 'zod';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 // GET - Fetch all admins (Super Admin only)
 export async function GET() {
   try {

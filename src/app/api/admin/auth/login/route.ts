@@ -4,6 +4,9 @@ import { loginSchema } from '@/lib/validations/admin';
 import { verifyPassword, createSession } from '@/lib/auth';
 import { z } from 'zod';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

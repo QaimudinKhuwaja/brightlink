@@ -2,6 +2,9 @@ import { redirect } from 'next/navigation';
 import { getCurrentAdmin } from '@/lib/auth';
 import { Sidebar } from '@/components/admin/Sidebar';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({
   children,
 }: {

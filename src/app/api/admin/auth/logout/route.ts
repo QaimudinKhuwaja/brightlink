@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { destroySession } from '@/lib/auth';
 
+// Force dynamic rendering - required for cookie-based authentication
+export const dynamic = 'force-dynamic';
+
 export async function POST() {
   try {
     await destroySession();

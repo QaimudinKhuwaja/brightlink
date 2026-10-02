@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth';
-import PDFDocument from 'pdfkit';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
-// Force this route to use Node.js runtime
-export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
@@ -21,7 +19,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Fetch admission data
     const admission = await prisma.admission.findUnique({
       where: { id },
     });
@@ -33,17 +30,6 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Create PDF document
-    const doc = new PDFDocument({
-      size: 'A4',
-      margins: { top: 40, bottom: 40, left: 40, right: 40 },
-    });
-
-    // Collect PDF chunks
-    const chunks: Buffer[] = [];
-    doc.on('data', (chunk) => chunks.push(chunk));
-
-    // Format date helper
     const formatDate = (date: Date) => {
       return date.toLocaleDateString('en-US', {
         month: 'long',
@@ -52,159 +38,129 @@ export async function GET(request: NextRequest) {
       });
     };
 
-    // Header with school name
-    doc
-      .fontSize(20)
-      .fillColor('#1e40af')
-      .text('BRIGHTLINK PUBLIC SCHOOL', { align: 'center' })
-      .fontSize(10)
-      .fillColor('#6b7280')
-      .text('Khuhra, Tehsil Gambat, District Khairpur', { align: 'center' })
-      .moveDown(0.5);
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595, 842]); // A4
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-    // Add blue line
-    doc
-      .moveTo(40, doc.y)
-      .lineTo(555, doc.y)
-      .strokeColor('#2563eb')
-      .lineWidth(2)
-      .stroke()
-      .moveDown(1);
+    let y = 800;
 
-    // Form Title
-    doc
-      .fontSize(16)
-      .fillColor('#1f2937')
-      .text('ADMISSION FORM', { align: 'center', underline: true })
-      .moveDown(1);
+    // Header
+    page.drawText('BRIGHTLINK PUBLIC SCHOOL', {
+      x: 50,
+      y,
+      size: 20,
+      font: fontBold,
+      color: rgb(0.12, 0.25, 0.69),
+    });
+    y -= 20;
+    page.drawText('Khuhra, Tehsil Gambat, District Khairpur', {
+      x: 50,
+      y,
+      size: 10,
+      font,
+      color: rgb(0.42, 0.45, 0.50),
+    });
+    y -= 30;
 
-    // Helper function for section headers
-    const addSectionHeader = (title: string) => {
-      doc
-        .fontSize(13)
-        .fillColor('#374151')
-        .fillAndStroke('#f3f4f6', '#f3f4f6')
-        .rect(40, doc.y, 515, 25)
-        .fill()
-        .fillColor('#374151')
-        .text(title, 46, doc.y - 19)
-        .moveDown(0.5);
-    };
+    // Title
+    page.drawText('ADMISSION FORM', {
+      x: 220,
+      y,
+      size: 16,
+      font: fontBold,
+      color: rgb(0.12, 0.16, 0.22),
+    });
+    y -= 40;
 
-    // Helper function for field rows
-    const addFieldRow = (label: string, value: string) => {
-      const y = doc.y;
-      doc
-        .fontSize(9)
-        .fillColor('#6b7280')
-        .text(label, 40, y)
-        .fontSize(10)
-        .fillColor('#1f2937')
-        .text(value || 'N/A', 40, y + 12, {
-          width: 250,
-        })
-        .moveDown(1);
-    };
+    // Student Information
+    page.drawRectangle({ x: 40, y: y - 20, width: 515, height: 25, color: rgb(0.95, 0.96, 0.96) });
+    page.drawText('STUDENT INFORMATION', { x: 46, y: y - 15, size: 13, font: fontBold });
+    y -= 40;
 
-    const addTwoColumnRow = (label1: string, value1: string, label2: string, value2: string) => {
-      const y = doc.y;
+    page.drawText('Full Name', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.studentName, { x: 40, y: y - 12, size: 10, font });
+    page.drawText("Father's Name", { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.fatherName, { x: 300, y: y - 12, size: 10, font });
+    y -= 35;
 
-      // Left column
-      doc
-        .fontSize(9)
-        .fillColor('#6b7280')
-        .text(label1, 40, y)
-        .fontSize(10)
-        .fillColor('#1f2937')
-        .text(value1 || 'N/A', 40, y + 12, { width: 240 });
+    page.drawText('Gender', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.gender, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Date of Birth', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(formatDate(admission.dateOfBirth), { x: 300, y: y - 12, size: 10, font });
+    y -= 35;
 
-      // Right column
-      doc
-        .fontSize(9)
-        .fillColor('#6b7280')
-        .text(label2, 300, y)
-        .fontSize(10)
-        .fillColor('#1f2937')
-        .text(value2 || 'N/A', 300, y + 12, { width: 240 });
+    page.drawText('B-Form Number', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.bFormNumber, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Previous School', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.previousSchool || 'N/A', { x: 300, y: y - 12, size: 10, font });
+    y -= 45;
 
-      doc.moveDown(1.5);
-    };
+    // Parent Information
+    page.drawRectangle({ x: 40, y: y - 20, width: 515, height: 25, color: rgb(0.95, 0.96, 0.96) });
+    page.drawText('PARENT/GUARDIAN INFORMATION', { x: 46, y: y - 15, size: 13, font: fontBold });
+    y -= 40;
 
-    // Student Information Section
-    addSectionHeader('STUDENT INFORMATION');
-    addTwoColumnRow('Full Name', admission.studentName, "Father's Name", admission.fatherName);
-    addTwoColumnRow('Gender', admission.gender, 'Date of Birth', formatDate(admission.dateOfBirth));
-    addTwoColumnRow('B-Form Number', admission.bFormNumber, 'Previous School', admission.previousSchool || 'N/A');
-    doc.moveDown(0.5);
+    page.drawText('Parent/Guardian Name', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.parentName, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Contact Number', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.phone, { x: 300, y: y - 12, size: 10, font });
+    y -= 35;
 
-    // Parent/Guardian Information Section
-    addSectionHeader('PARENT/GUARDIAN INFORMATION');
-    addTwoColumnRow('Parent/Guardian Name', admission.parentName, 'Contact Number', admission.phone);
-    addTwoColumnRow('WhatsApp Number', admission.whatsapp, 'Email Address', admission.email || 'N/A');
-    doc.moveDown(0.5);
+    page.drawText('WhatsApp Number', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.whatsapp, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Email Address', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.email || 'N/A', { x: 300, y: y - 12, size: 10, font });
+    y -= 45;
 
-    // Address Information Section
-    addSectionHeader('ADDRESS INFORMATION');
-    addTwoColumnRow('City', admission.city, 'Area', admission.area);
-    addFieldRow('Complete Address', admission.completeAddress);
-    doc.moveDown(0.5);
+    // Address Information
+    page.drawRectangle({ x: 40, y: y - 20, width: 515, height: 25, color: rgb(0.95, 0.96, 0.96) });
+    page.drawText('ADDRESS INFORMATION', { x: 46, y: y - 15, size: 13, font: fontBold });
+    y -= 40;
 
-    // Admission Details Section
-    addSectionHeader('ADMISSION DETAILS');
-    addTwoColumnRow('Applying for Class', admission.applyingClass, 'Session', admission.session);
-    addTwoColumnRow('Application Date', formatDate(admission.createdAt), 'Admission Date', formatDate(admission.admissionDate));
-    doc.moveDown(1);
+    page.drawText('City', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.city, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Area', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.area, { x: 300, y: y - 12, size: 10, font });
+    y -= 35;
 
-    // For Office Use Only Box
-    doc
-      .fillAndStroke('#fef3c7', '#d1d5db')
-      .rect(40, doc.y, 515, 80)
-      .fill()
-      .stroke();
+    page.drawText('Complete Address', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.completeAddress, { x: 40, y: y - 12, size: 10, font });
+    y -= 45;
 
-    const officeY = doc.y + 10;
-    doc
-      .fontSize(12)
-      .fillColor('#92400e')
-      .text('FOR OFFICE USE ONLY', 46, officeY);
+    // Admission Details
+    page.drawRectangle({ x: 40, y: y - 20, width: 515, height: 25, color: rgb(0.95, 0.96, 0.96) });
+    page.drawText('ADMISSION DETAILS', { x: 46, y: y - 15, size: 13, font: fontBold });
+    y -= 40;
 
-    doc.moveDown(0.8);
-    addTwoColumnRow('Registration Number', '____________________', 'Status', admission.status);
-    addTwoColumnRow('Verified By', '____________________', 'Signature', '____________________');
+    page.drawText('Applying for Class', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.applyingClass, { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Session', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(admission.session, { x: 300, y: y - 12, size: 10, font });
+    y -= 35;
+
+    page.drawText('Application Date', { x: 40, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(formatDate(admission.createdAt), { x: 40, y: y - 12, size: 10, font });
+    page.drawText('Admission Date', { x: 300, y, size: 9, font, color: rgb(0.42, 0.45, 0.50) });
+    page.drawText(formatDate(admission.admissionDate), { x: 300, y: y - 12, size: 10, font });
+    y -= 50;
+
+    // Office Use Only Box
+    page.drawRectangle({ x: 40, y: y - 80, width: 515, height: 80, color: rgb(1, 0.95, 0.78), borderColor: rgb(0.82, 0.84, 0.86), borderWidth: 1 });
+    page.drawText('FOR OFFICE USE ONLY', { x: 46, y: y - 20, size: 12, font: fontBold, color: rgb(0.57, 0.25, 0.05) });
+    page.drawText('Status: ' + admission.status, { x: 46, y: y - 50, size: 10, font });
+    y -= 100;
 
     // Footer
-    doc.moveDown(2);
-    doc
-      .moveTo(40, doc.y)
-      .lineTo(555, doc.y)
-      .strokeColor('#d1d5db')
-      .lineWidth(1)
-      .stroke();
+    page.drawText('This is a computer-generated admission form for BrightLink Public School', { x: 100, y: 40, size: 8, font, color: rgb(0.61, 0.64, 0.69) });
+    page.drawText('For queries, contact: +92 300 0811056 | Email: info@brightlinkschool.edu.pk', { x: 80, y: 25, size: 8, font, color: rgb(0.61, 0.64, 0.69) });
 
-    doc.moveDown(0.5);
-    doc
-      .fontSize(8)
-      .fillColor('#9ca3af')
-      .text('This is a computer-generated admission form for BrightLink Public School', { align: 'center' })
-      .text('For queries, contact: +92 300 0811056 | Email: info@brightlinkschool.edu.pk', { align: 'center' });
+    const pdfBytes = await pdfDoc.save();
 
-    // Finalize PDF
-    doc.end();
-
-    // Wait for PDF to finish
-    await new Promise<void>((resolve) => {
-      doc.on('end', () => resolve());
-    });
-
-    // Combine chunks into buffer
-    const pdfBuffer = Buffer.concat(chunks);
-
-    // Return PDF response
-    return new Response(pdfBuffer, {
+    return new Response(pdfBytes, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="admission-form-${admission.studentName.replace(/\s+/g, '-')}-${id.slice(0, 8)}.pdf"`,
-        'Content-Length': pdfBuffer.length.toString(),
       },
     });
   } catch (error: any) {

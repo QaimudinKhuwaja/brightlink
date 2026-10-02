@@ -157,7 +157,7 @@ export async function GET(request: NextRequest) {
 
     const pdfBytes = await pdfDoc.save();
 
-    return new Response(pdfBytes, {
+    return new Response(Buffer.from(pdfBytes), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="admission-form-${admission.studentName.replace(/\s+/g, '-')}-${id.slice(0, 8)}.pdf"`,

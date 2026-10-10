@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { feedbackSchema } from '@/lib/validations/feedback';
 import { z } from 'zod';
 
+// Force dynamic rendering to prevent caching in production
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

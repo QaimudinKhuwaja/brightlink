@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+// Force dynamic rendering to prevent caching in production
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const faculty = await prisma.faculty.findMany({
